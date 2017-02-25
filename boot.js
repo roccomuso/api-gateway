@@ -1,14 +1,13 @@
 // Clustering to exploit all the cores of a machine. Node is single-threaded so it will use by default only 1 core.
 var cluster = require('cluster')
-var debug = require('debug')('boot')
-
-process.env.NODE_CONFIG_DIR= __dirname + '/config'; // setting config absolute path
+var debug = require('debug')('api-gateway:boot')
+var argv = require('./lib/argv')
 
 if (cluster.isMaster) { // Master process
     var environment = process.env.NODE_ENV || 'development' // production to use express built-in cache middleware
     debug('Running in %s environment', environment)
 
-    var numCPUs = require("os").cpus().length;
+    var numCPUs = argv.istances || require("os").cpus().length;
 
     for (var i = 0; i < numCPUs; i++) {
         cluster.fork(); // 1 process per core
