@@ -10,6 +10,12 @@ Node.js API gateway that works as single entry point for all clients in a MicroS
 
 ## Features
 
-- [ ] Cluster to spawn on multiple processes.
-- [ ] Proxy WS
+- [ ] Cluster support to spawn multiple processes.
+- [ ] Proxy WS.
+- [ ] JSON descriptor for Services.
+- [ ] Store descriptors.
 
+## Enhancement
+
+- [ ] Service discovery.
+- [ ] Services descriptors dynamic update.
