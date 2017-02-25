@@ -28,38 +28,15 @@ var accessLogStream = rfs('access.log', {
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}))
 
-// TODO:
-app.use('/api', proxy({target: 'http://192.168.88.111:8080/info', changeOrigin: true, ws: true}))
-
-// Routes middlewares
-app.use('/api/', require('./routes/backend-router.js'))
-app.use('/', require('./routes/frontend-router.js'))
+// Routes middlewares autoloader
+require('./routes/index')(app)
 
 // 404 Middleware
 app.use(function (req, res, next) {
   res.status(404)
-  // respond with html page
-  if (req.accepts('html')) {
-    res.render('index', { // render 404.html
-      partials: {
-        header: 'header',
-        navbar: 'navbar',
-        body: 'index_body',
-        choices: 'choices',
-        sidebar: 'sidebar',
-        footer: 'footer',
-        js_import: 'js_import'
-      },
-      url: req.url,
-      date: Date(),
-      pid: process.pid
-    })
-    return
-  }
   // respond with json
   if (req.accepts('json')) {
-    res.send({ error: 'Not found' })
-    return
+    return res.send({ error: 'Not found' })
   }
   // default to plain-text. send()
   res.type('txt').send('Not found')
