@@ -4,7 +4,7 @@ var express = require('express')
 var proxy = require('http-proxy-middleware')
 var morgan = require('morgan')
 var rfs = require('rotating-file-stream')
-//var https = require('https')
+// var https = require('https')
 var fs = require('fs')
 var path = require('path')
 var app = express()
@@ -27,7 +27,6 @@ var accessLogStream = rfs('access.log', {
 
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}))
-
 
 // TODO:
 app.use('/api', proxy({target: 'http://192.168.88.111:8080/info', changeOrigin: true, ws: true}))
