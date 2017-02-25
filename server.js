@@ -1,17 +1,33 @@
 var debug = require('debug')('api-gateway:server')
+var argv = require('./lib/argv')
+var express = require('express')
 var proxy = require('http-proxy-middleware')
 var morgan = require('morgan')
-var argv = require('./lib/argv')
+var rfs = require('rotating-file-stream')
 //var https = require('https')
-//var fs = require('fs')
-var express = require('express')
+var fs = require('fs')
+var path = require('path')
 var app = express()
 
 // set server port
 app.set('port', argv.port)
 
-// use morgan middleware to log all the http requests
-app.use(morgan('dev'));
+var logDirectory = path.join(__dirname, 'logs')
+
+// ensure log directory exists
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+
+// create a rotating write stream
+var accessLogStream = rfs('access.log', {
+  size: '10M',
+  interval: '1d', // rotate daily
+  compress: 'gzip',
+  path: logDirectory
+})
+
+// setup the logger
+app.use(morgan('combined', {stream: accessLogStream}))
+
 
 // TODO:
 app.use('/api', proxy({target: 'http://192.168.88.111:8080/info', changeOrigin: true, ws: true}))
