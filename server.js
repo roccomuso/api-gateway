@@ -1,23 +1,22 @@
-var debug = require('debug')('server')
+var debug = require('debug')('api-gateway:server')
 var proxy = require('http-proxy-middleware')
 var morgan = require('morgan')
-var config = require('config')
+var argv = require('./lib/argv')
 var https = require('https')
 var fs = require('fs')
 var express = require('express')
 var app = express()
 
 // set server port
-app.set('port', process.argv[2] || config.server.port)
+app.set('port', argv.port)
 
 
-app.use('/api', proxy({target:'http://www.example.org', changeOrigin:true, ws: true}))
+app.use('/api', proxy({target:'http://192.168.88.111:8080/info', changeOrigin:true, ws: true}))
 
 
 // Routes middlewares
 app.use('/api/', require('./routes/backend-router.js'))
 app.use('/', require('./routes/frontend-router.js'))
-app.use('/admin/', require('./routes/admin-router.js'))
 
 // 404 Middleware
 app.use(function(req, res, next){
