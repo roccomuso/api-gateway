@@ -1,0 +1,22 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "boot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^1.25.1",
+    "debug": "^2.6.1",
+    "express": "^4.14.1",
+    "http-proxy-middleware": "^0.17.3",
+    "morgan": "^1.8.1"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
+}
