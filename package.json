@@ -1,14 +1,8 @@
 {
   "name": "api-gateway",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js API gateway that works as single entry point for all clients in a MicroService architecture pattern",
   "main": "boot.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "config": "^1.25.1",
     "debug": "^2.6.1",
@@ -18,5 +12,27 @@
   },
   "devDependencies": {
     "standard": "^8.6.0"
-  }
+  },
+  "scripts": {
+    "test": "standard",
+    "start": "node boot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roccomuso/api-gateway.git"
+  },
+  "keywords": [
+    "api",
+    "gateway",
+    "rest",
+    "proxy",
+    "nodejs",
+    "mmicroservices"
+  ],
+  "author": "Rocco Musolino",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roccomuso/api-gateway/issues"
+  },
+  "homepage": "https://github.com/roccomuso/api-gateway#readme"
 }
