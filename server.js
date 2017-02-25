@@ -10,16 +10,14 @@ var app = express()
 // set server port
 app.set('port', argv.port)
 
-
-app.use('/api', proxy({target:'http://192.168.88.111:8080/info', changeOrigin:true, ws: true}))
-
+app.use('/api', proxy({target: 'http://192.168.88.111:8080/info', changeOrigin: true, ws: true}))
 
 // Routes middlewares
 app.use('/api/', require('./routes/backend-router.js'))
 app.use('/', require('./routes/frontend-router.js'))
 
 // 404 Middleware
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.status(404)
   // respond with html page
   if (req.accepts('html')) {
@@ -36,8 +34,8 @@ app.use(function(req, res, next){
       url: req.url,
       date: Date(),
       pid: process.pid
-    });
-    return;
+    })
+    return
   }
   // respond with json
   if (req.accepts('json')) {
@@ -45,12 +43,12 @@ app.use(function(req, res, next){
     return
   }
   // default to plain-text. send()
-  res.type('txt').send('Not found');
+  res.type('txt').send('Not found')
 })
 
 // start the server
 var srv = app.listen(app.get('port'), function () {
-  	debug(process.pid+': Server listening on port', srv.address().port)
+  	debug(process.pid + ': Server listening on port', srv.address().port)
 })
 
 /*
