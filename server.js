@@ -2,14 +2,18 @@ var debug = require('debug')('api-gateway:server')
 var proxy = require('http-proxy-middleware')
 var morgan = require('morgan')
 var argv = require('./lib/argv')
-var https = require('https')
-var fs = require('fs')
+//var https = require('https')
+//var fs = require('fs')
 var express = require('express')
 var app = express()
 
 // set server port
 app.set('port', argv.port)
 
+// use morgan middleware to log all the http requests
+app.use(morgan('dev'));
+
+// TODO:
 app.use('/api', proxy({target: 'http://192.168.88.111:8080/info', changeOrigin: true, ws: true}))
 
 // Routes middlewares
@@ -48,7 +52,7 @@ app.use(function (req, res, next) {
 
 // start the server
 var srv = app.listen(app.get('port'), function () {
-  	debug(process.pid + ': Server listening on port', srv.address().port)
+  debug(process.pid + ': Server listening on port', srv.address().port)
 })
 
 /*
