@@ -27,6 +27,7 @@ var accessLogStream = rfs('access.log', {
 
 // setup the logger
 app.use(morgan('combined', {stream: accessLogStream}))
+app.use(require('./lib/debugMiddleware'))
 
 // Routes middlewares autoloader
 require('./routes/index')(app)
