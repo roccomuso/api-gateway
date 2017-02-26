@@ -15,7 +15,7 @@ var options = {
 
     // additional request headers
     headers: {
-        'x-powered-by': 'foobar'
+        'x-powered-by': 'api-gateway'
     },
 
     // rewrite paths
