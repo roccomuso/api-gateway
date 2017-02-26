@@ -16,7 +16,7 @@
   },
   "scripts": {
     "test": "standard",
-    "start": "node boot.js"
+    "start": "DEBUG=api-gateway:* node boot.js"
   },
   "repository": {
     "type": "git",
