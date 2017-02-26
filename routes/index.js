@@ -1,6 +1,7 @@
 // Routes autoloader
 
 var fs = require('fs')
+var path = require('path')
 var debug = require('debug')('api-gateway:routesLoader')
 
 module.exports = function(app){
@@ -9,7 +10,7 @@ module.exports = function(app){
       return (file.indexOf('.') !== 0) && (file !== 'index.js')
     })
     .forEach(function(file){
-      require(file)(app)
+      require(path.join(__dirname, file))(app)
       debug('Route', file, 'loaded')
     })
 }
