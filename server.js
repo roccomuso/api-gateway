@@ -34,12 +34,7 @@ require('./routes/index')(app)
 // 404 Middleware
 app.use(function (req, res, next) {
   res.status(404)
-  // respond with json
-  if (req.accepts('json')) {
-    return res.send({ error: 'Not found' })
-  }
-  // default to plain-text. send()
-  res.type('txt').send('Not found')
+  res.end({ error: 'Not found', pid: process.pid })
 })
 
 // start the server
