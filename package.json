@@ -9,6 +9,7 @@
     "http-proxy-middleware": "^0.17.3",
     "morgan": "^1.8.1",
     "rotating-file-stream": "^1.1.9",
+    "transformer-proxy": "^0.3.3",
     "yargs": "^6.6.0"
   },
   "devDependencies": {
