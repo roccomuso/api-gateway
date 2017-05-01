@@ -9,6 +9,10 @@ Node.js API gateway that works as single entry point for all clients in a MicroS
 
 ![API Gateway](https://github.com/roccomuso/api-gateway/blob/master/other/img/APIGateway.png?raw=true "Node.js API Gateway")
 
+## Install
+
+    $ npm install --save api-gateway
+
 ## Features
 
 - [ ] Cluster support to spawn multiple processes.
